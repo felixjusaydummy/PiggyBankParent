@@ -123,6 +123,15 @@ function PurseAllocationModal(props, ref) {
 
           <DialogContentText>{getMessageDescription()}
           </DialogContentText>
+          <TextField 
+            autoFocus 
+            margin="dense" 
+            name="iDescriptionHolder" 
+            label="Account" 
+            value="Chloe"
+            type="text"
+            fullWidth 
+            />
 
           {(addAllocation === TASK_POCKET_ADD_NEW)?(
             //ADD NEW ALLOCATION
@@ -130,7 +139,7 @@ function PurseAllocationModal(props, ref) {
             autoFocus 
             margin="dense" 
             name="iDescriptionHolder" 
-            label="Account" 
+            label="Remarks" 
             type="text"
             fullWidth 
             onChange={(evt)=>{ setDescription(evt.target.value) }}

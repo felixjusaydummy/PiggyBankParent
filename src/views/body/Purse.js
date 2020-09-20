@@ -42,6 +42,7 @@ import PurseAllocationModal from '../modal/PurseAllocationModal';
 import YesNoModal from '../modal/YesNoModal';
 import InfoModal from '../modal/InfoModal';
 import TransferSavingsModal from  '../modal/TransferSavingsModal';
+import { Snackbar } from '@material-ui/core';
 
 
 
@@ -83,6 +84,17 @@ function Purse(props){
 
   const refTransferSavings = useRef();
   const ChildModal3 = forwardRef(TransferSavingsModal);
+
+  let popmesage = null
+    if( props.action_type){
+        popmesage = (<Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={true}
+          message="I love snacks"
+          key={uuid()}
+        />);
+        console.log("create snackbar")
+    }
 
   if(props.user.purse){
     const page = (
@@ -157,11 +169,13 @@ function Purse(props){
             
           
         </div>
-        
+        {popmesage}
       </Container>
     );
     return page;
+    
   }else{
+
     const page = (
       <Container component="main" maxWidth="md">
         <CssBaseline />
@@ -219,7 +233,7 @@ function Purse(props){
             
   
         </div>
-        
+        {popmesage}
       </Container>
     );
     return page;
@@ -244,8 +258,16 @@ function mapDispatchToProps(dispatch){
             type: USER_PURSE_ALLOCATION_ADD,
             payload: {
               description: iDescription,
+              active: true,
+
+              to: "chloe",
+              date: "january 4, 2020",
+              type: "cash-in",
+              donor: "Ninong",
+              name: props.user.name,
+              remark: iDescription,
               amount: iAmount,
-              active: true
+              coins: 10
             },
             authorization: props.authorization,
             user: props.user

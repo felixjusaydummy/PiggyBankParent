@@ -1,6 +1,6 @@
 import * as LOCALSTORAGE from "local-storage"
 
-const AUTHORIZATION_KEY = "thriftykoala"
+const AUTHORIZATION_KEY = "piggybankparent"
 
 export function setAuthorization(authorization_value){
     LOCALSTORAGE.set(AUTHORIZATION_KEY, authorization_value);

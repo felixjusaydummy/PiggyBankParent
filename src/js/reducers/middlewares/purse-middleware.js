@@ -1,13 +1,12 @@
 import * as ACTIONTYPE from "../../constants/action-type";
 import * as STATUSTYPE from "../../constants/status-type";
 import * as PurseManager from "../../actions-api/purse-manager"
-import * as AccountManager from  "../../actions-api/account-manager"
 
 export const addAllocation = (action, dispatch)=>{
     new Promise((resolve, reject)=>{
         try{
             //add thriftpoints
-            
+            console.log("purse add allocation")
             let result = PurseManager.addPurseAllocation(action.payload, action.authorization);
             resolve(result)
         }catch(err){
@@ -30,8 +29,8 @@ export const addAllocation = (action, dispatch)=>{
                 data : response.data.data,
                 action_status: action_status
             }
-            // console.log("pursemiddleware succss: ")
-            // console.log("pursemiddleware succss: "+ JSON.stringify(response.data.data.user, null, 2))
+            console.log("pursemiddleware succss: ")
+            console.log("pursemiddleware succss: "+ JSON.stringify(response.data.data.user, null, 2))
             dispatch(action);
         }else{
             let action_status = {

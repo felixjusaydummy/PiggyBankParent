@@ -134,13 +134,10 @@ function Home(props) {
 
   const page  =  (
     <div className={classes.root}>
-      
       <BrowserRouter>
         <CssBaseline />
-
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
-
             <IconButton
               edge="start"
               color="inherit"
@@ -160,12 +157,8 @@ function Home(props) {
               >
               <MenuOpenSharpIcon />
             </IconButton>
-
-
-            
           </Toolbar>
         </AppBar>
-
 
 
         <Drawer
@@ -175,9 +168,6 @@ function Home(props) {
           }}
           open={open}
         >
-          
-          
-            
             <List>
               <ListItem >
                 <ListItemIcon>
@@ -188,9 +178,6 @@ function Home(props) {
                 </ListItemText>
               </ListItem>  
             </List>
-          
-            
-          
           <Divider />
           
             <List>{mainListItems.mainfunction(props)}</List>
