@@ -25,16 +25,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import EcoIcon from '@material-ui/icons/Eco';
 
-import { 
-  USER_PURSE_ALLOCATION_ADD,
-  USER_PURSE_ALLOCATION_ADD_CASH,
-  USER_PURSE_ALLOCATION_DELETE,
-  USER_PURSE_ALLOCATION_RELEASE_CASH,
-  USER_SAVINGSACCOUNT_TO_VAULT,
-  MESSAGE_RESET_DEFAULT
-
-} from "../../js/constants/action-type";
-
+import * as ACTIONTYPE from "./../../js/constants/action-type";
 import * as STATUS_TYPE from "../../js/constants/status-type";
 
 import NumberFormat from 'react-number-format';
@@ -44,13 +35,14 @@ import InfoModal from '../modal/InfoModal';
 import TransferSavingsModal from  '../modal/TransferSavingsModal';
 import { Snackbar } from '@material-ui/core';
 
-
-
 const { forwardRef, useRef } = React;
 
 function Purse(props){
 
+  console.log("Im in Purse: "+ props.countvisit + " : " + props.action_type)
   const classes = useStyles();
+
+  
 
   // *** FUNCTIONS *** //
   const passToAddNewAllocation = (iDescription, iAmount)=>{
@@ -85,16 +77,28 @@ function Purse(props){
   const refTransferSavings = useRef();
   const ChildModal3 = forwardRef(TransferSavingsModal);
 
+
+
+  const [open, setOpen] = React.useState((props.action_type === ACTIONTYPE.USER_PURSE_ALLOCATION_ADD_RESOLVED? false : true));
+  const handleClose = (event, reason) => {
+    console.log("to close: " + reason)
+    setOpen(false);
+  };
+
+
+  // *** MAIN *** //
   let popmesage = null
-    if( props.action_type){
-        popmesage = (<Snackbar
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          open={true}
-          message="I love snacks"
-          key={uuid()}
-        />);
-        console.log("create snackbar")
-    }
+  console.log("create snackbar: "+ props.action_type + " : " +  open)
+  if( props.action_type === ACTIONTYPE.USER_PURSE_ALLOCATION_ADD_RESOLVED){
+      popmesage = (<Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={open}
+        onClose={handleClose}
+
+        message="Transfer Fund Completed"
+        key={uuid()}
+      />);
+  }
 
   if(props.user.purse){
     const page = (
@@ -173,7 +177,7 @@ function Purse(props){
       </Container>
     );
     return page;
-    
+
   }else{
 
     const page = (
@@ -255,13 +259,13 @@ function mapDispatchToProps(dispatch){
     
       addNewAllocation: (iDescription, iAmount, props)=>{
           const action = {
-            type: USER_PURSE_ALLOCATION_ADD,
+            type: ACTIONTYPE.USER_PURSE_ALLOCATION_ADD,
             payload: {
               description: iDescription,
               active: true,
 
               to: "chloe",
-              date: "january 4, 2020",
+              date: new Intl.DateTimeFormat().format(new Date()),
               type: "cash-in",
               donor: "Ninong",
               name: props.user.name,
@@ -276,7 +280,7 @@ function mapDispatchToProps(dispatch){
       },
       addCashAllocation: (payload, iAmount, props)=>{
         const action = {
-          type: USER_PURSE_ALLOCATION_ADD_CASH,
+          type: ACTIONTYPE.USER_PURSE_ALLOCATION_ADD_CASH,
           payload: {
             // id: payload.id,
             description: payload.description,
@@ -291,7 +295,7 @@ function mapDispatchToProps(dispatch){
       },
       deleteAllocation: (description, props) =>{
         const action = {
-          type: USER_PURSE_ALLOCATION_DELETE,
+          type: ACTIONTYPE.USER_PURSE_ALLOCATION_DELETE,
           payload: {
             // id: iPurseAllocationId
             description: description,
@@ -302,7 +306,7 @@ function mapDispatchToProps(dispatch){
       },
       releaseAllocationAmount: (payload, releaseAmount, props)=>{
         const action = {
-          type: USER_PURSE_ALLOCATION_RELEASE_CASH,
+          type: ACTIONTYPE.USER_PURSE_ALLOCATION_RELEASE_CASH,
           payload: {
             // id: payload.id,
             description: payload.description,
@@ -316,7 +320,7 @@ function mapDispatchToProps(dispatch){
       },
       purseToVault: (iAmount, props)=>{
         const action = {
-          type: USER_SAVINGSACCOUNT_TO_VAULT,
+          type: ACTIONTYPE.USER_SAVINGSACCOUNT_TO_VAULT,
           payload: {
             amount: iAmount
           },
@@ -326,7 +330,7 @@ function mapDispatchToProps(dispatch){
       },
       resetMessageStatus: ()=>{
         const action = {
-          type: MESSAGE_RESET_DEFAULT
+          type: ACTIONTYPE.MESSAGE_RESET_DEFAULT
         };
         dispatch(action);
       }

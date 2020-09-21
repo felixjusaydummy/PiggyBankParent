@@ -187,8 +187,8 @@ async function callReleaseAllocationCash(payload, authorizationToken){
     })
 }
 export async function releaseAllocationCash(payload, authorizationToken){
-    await callReleaseAllocationCash(payload, authorizationToken);
-    // return USERACCOUNT.getAccountDetails(authorizationToken);
+    // await callReleaseAllocationCash(payload, authorizationToken);
+    return USERACCOUNT.getAccountDetails(authorizationToken);
     return tempData
 }
 

@@ -8,7 +8,8 @@ var bgColors = {
     "Green": "#7fad4e",
     "Red": "#E9573F",
     "Yellow": "#F6BB42",
-    "Violet": "431677"
+    "Violet": "#431677",
+    "DarkViolet": "#30134f"
 };
 
 export const useStyles = makeStyles(theme => ({

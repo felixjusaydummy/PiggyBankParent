@@ -69,7 +69,8 @@ function rootReducer(state = getInitialState(), action){
             })    
     }
 
-    state = Object.assign({}, state, {countvisit: state.countvisit+1})    
+    state = Object.assign({}, state, {countvisit: state.countvisit+1, action_type: action.type})    
+    console.log("end reducer: "+ state.action_type)
     return state;
 }
 

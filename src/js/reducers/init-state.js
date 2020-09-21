@@ -80,7 +80,7 @@ const walletTemplate = [
 
 export const initialState = {
     countvisit : 0,
-    app_name: "Transfer Fund",
+    app_name: "Bieber",
     useractive : false,
     authorization: "",
 
@@ -102,7 +102,8 @@ export const initialState = {
     
     wallet_template: walletTemplate,
     current_inbox : null,
-    current_accountdetails : null
+    current_accountdetails : null,
+    action_type: ""
 }
 
 
